@@ -5,12 +5,13 @@ import time
 
 
 class gui:
-    def __init__(self, window, background):
+    def __init__(self, window, title, background):
         self.window = Tk()
+        self.background = background
+        self.title = title
         self.window.title("GUI")
         self.window.resizable(0, 0)
         self.window.geometry('724x380')
-        self.background = background
         self.window.config(bg=self.background)
         show_msg = False
 
@@ -28,7 +29,7 @@ class gui:
             save_data()
             print(f"Selected folder: {path_var}")  # Prints the selected path
             time.sleep(1)
-            tkinter.messagebox.showinfo("Folder selected", "Your folder has been uploaded")
+            tkinter.messagebox.showinfo("Folder selected", "Your folder has been uploaded successfully")
             self.window.destroy()
 
         class_list = [i for i in range(1, 13)]  # List of classes
