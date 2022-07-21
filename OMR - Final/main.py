@@ -1,5 +1,13 @@
-from gui import gui
+import os
+import scanOMR
 
-object = gui(object, background='#a3c3ff')
-print(object.create_window())
-object.mainloop()
+
+#{'class':'12', 'section':'A','exam':'PA-1'}
+
+folder = "D:\\Daksh\\Python\\Optical Mark Recognition\\FinalOMR-main\\12-A"
+files = os.listdir(folder)
+
+for file in files:
+    imgPath = f"{folder}\\{file}"
+    img = scanOMR.read(imgPath)
+    scanOMR.scan(img)
