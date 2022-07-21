@@ -1,19 +1,19 @@
 import numpy as np
 import cv2
 import utilities
-import os
 
 ###############################################
-folder = "C:\\Users\\HCL_6\\Desktop\\CS Project - Daksh\\FINAL\\12-A\\"
-filesList = os.listdir(folder)
 a, b, c, d, e = 0, 1, 2, 3, 4
 imgWidth, imgHeight = 600, 700
 questions, choices = 10, 5
 ans = [c, c, a, d, c, b, d, a, d, c]
 ###############################################
 
-imgPath = "C:\\Users\\HCL_6\\Desktop\\CS Project - Daksh\\FINAL\\12-A\\Shubhojit.jpg"
-img = cv2.imread(imgPath)
+
+def read(filename):
+    img = cv2.imread(filename)
+    return img
+
 
 def scan(img):
     # PRE-PROCESSING:
@@ -108,6 +108,3 @@ def scan(img):
         cv2.imshow("FINAL", imgFinal)
         print(score)
     cv2.waitKey(0)
-
-
-scan(img)
