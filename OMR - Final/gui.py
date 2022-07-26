@@ -35,10 +35,10 @@ class gui:
         section_list_12_Hum = ['F']
         exam_list = ["PA-1", "Term-1", "PA-2", "Term-2"]
         stream_list = ["Science", "Commerce", "Humanities"]
-        subject_list_1_10 = ["English", "H/F/S", "Math", "Science", "Social Sci", "ICT"]
+        subject_list_1_10 = ["English", "H/F/S", "Math", "Science", "Social Sci", "A.I"]
         subject_11_12_sci = ["English", "Physics", "Chemistry", "Math/Bio", "PE/CS"]
         subject_11_12_com = ["English", "Accounts", "BST", "Eco", "Math/PE/CS/EP"]
-        subject_11_12_hum = ["English", "Pol Sci", "Geo", "Psycho", "EP/Bio"]
+        subject_11_12_hum = ["English", "Pol Science", "Geo", "Psycho", "EP/Bio"]
 
         def select_folder():
             path = filedialog.askdirectory(initialdir="C:/Users", title="Select a folder...")  # Select a folder
@@ -80,13 +80,16 @@ class gui:
                 stream_list_box["state"] = "disabled"
                 ok_button_stream["state"] = "disabled"
             elif int(class_list_box.get()) == 12:
-                ok_button_stream["state"] = "active"
+                section_list_box["state"] = "readonly"
                 if stream_list_box.get() == "Science":
                     section_list_box["values"] = section_list_12_Sci
+                    subject_list_box["values"] = subject_11_12_sci
                 elif stream_list_box.get() == "Commerce":
                     section_list_box["values"] = section_list_12_Com
+                    subject_list_box["values"] = subject_11_12_com
                 elif stream_list_box.get() == "Humanities":
                     section_list_box["values"] = section_list_12_Hum
+                    subject_list_box["values"] = subject_11_12_hum
                     section_list_box.current(newindex=0)
                     section_list_box["state"] = "disabled"
                 stream_list_box["state"] = "disabled"
