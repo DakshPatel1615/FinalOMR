@@ -3,6 +3,7 @@ from tkinter import filedialog
 from tkinter import ttk
 import tkinter.messagebox
 import time
+from tkinter.font import Font
 
 
 class gui:
@@ -35,10 +36,10 @@ class gui:
         section_list_12_Hum = ['F']
         exam_list = ["PA-1", "Term-1", "PA-2", "Term-2"]
         stream_list = ["Science", "Commerce", "Humanities"]
-        subject_list_1_10 = ["English", "H/F/S", "Math", "Science", "Social Sci", "A.I"]
-        subject_11_12_sci = ["English", "Physics", "Chemistry", "Math/Bio", "PE/CS"]
-        subject_11_12_com = ["English", "Accounts", "BST", "Eco", "Math/PE/CS/EP"]
-        subject_11_12_hum = ["English", "Pol Science", "Geo", "Psycho", "EP/Bio"]
+        subject_list_1_10 = ["English", "H,F,S", "Math", "Science", "Social Sci", "A.I"]
+        subject_11_12_sci = ["English", "Physics", "Chemistry", "Math,Bio", "PE,CS"]
+        subject_11_12_com = ["English", "Accounts", "BST", "Eco", "Math,PE,CS,EP"]
+        subject_11_12_hum = ["English", "Pol Science", "Geo", "Psycho", "EP,Bio"]
 
         def select_folder():
             path = filedialog.askdirectory(initialdir="C:/Users", title="Select a folder...")  # Select a folder
@@ -112,7 +113,7 @@ class gui:
             exam_list_box["state"] = "disabled"
             ok_button_exam["state"] = "disabled"
 
-        class_label = Label(self.window, text="Class", font="algerian 26 ", padx=15, bg=self.background)
+        class_label = Label(self.window, text="CLASS", font=Font(family="Hussar Ekologiczny", size=26), padx=15, bg=self.background)
         class_list_box = ttk.Combobox(self.window, values=class_list, state="readonly", width=4, font="arial 18 bold")
         class_label.place(x=65, y=69)
         class_list_box.place(x=97, y=130)
