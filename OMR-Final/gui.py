@@ -1,19 +1,21 @@
+import os
 from tkinter import *
 from tkinter import filedialog
 from tkinter import ttk
 import tkinter.messagebox
 import time
 from tkinter.font import Font
-
+from pyglet import font
 
 class gui:
     def __init__(self, window, title, background):
         self.window = Tk()
         self.background = background
+        self.font = Font(family='Algerian', size=26)
         self.title = title
         self.window.title(f"{self.title}")
         self.window.resizable(0, 0)
-        self.window.geometry('924x620')
+        self.window.geometry('924x670+0+0')
         self.window.config(bg=self.background)
         self.path_var = ''
         self.studentData = {}
@@ -47,7 +49,7 @@ class gui:
             self.path_var = path
             time.sleep(1.5)
             tkinter.messagebox.showinfo("Folder selected", "Your folder has been uploaded successfully")
-            self.window.destroy()
+            save_button["state"] = "active"
 
         def class_func():
             if int(class_list_box.get()) in range(1,11):
@@ -106,6 +108,7 @@ class gui:
         def subject_func():
             subject_list_box["state"] = "disabled"
             ok_button_subject["state"] = "disabled"
+            select_button["state"] = "active"
 
         def exam_func():
             subject_list_box["state"] = "readonly"
@@ -113,7 +116,13 @@ class gui:
             exam_list_box["state"] = "disabled"
             ok_button_exam["state"] = "disabled"
 
-        class_label = Label(self.window, text="CLASS", font=Font(family="Hussar Ekologiczny", size=26), padx=15, bg=self.background)
+        def select_to_save():
+            os.system(f"explorer.exe {self.path_var}")
+
+        button_frame = Frame(self.window, bg=self.background)
+        button_frame.pack(side=BOTTOM)
+
+        class_label = Label(self.window, text="CLASS", font=self.font, padx=15, bg=self.background)
         class_list_box = ttk.Combobox(self.window, values=class_list, state="readonly", width=4, font="arial 18 bold")
         class_label.place(x=65, y=69)
         class_list_box.place(x=97, y=130)
@@ -121,7 +130,7 @@ class gui:
         ok_button_class = Button(self.window, text="OK", font="arial 14 bold", padx=7, pady=2, command=class_func)
         ok_button_class.place(x=105, y=180)
 
-        stream_label = Label(self.window, text="Stream", font="algerian 26 ", padx=15, bg=self.background)
+        stream_label = Label(self.window, text="Stream", font=self.font, padx=15, bg=self.background)
         stream_list_box = ttk.Combobox(self.window, values=stream_list, state="disabled", width = 11, font = "arial 18 bold")
         stream_label.place(x=350, y=66)
         stream_list_box.place(x=357, y=130)
@@ -129,7 +138,7 @@ class gui:
         ok_button_stream = Button(self.window, text="OK", state="disabled", font="arial 14 bold", padx=7, pady=2, command=stream_func)
         ok_button_stream.place(x=405, y=180)
 
-        section_label = Label(self.window, text="Section", font="algerian 26 ", bg=self.background)
+        section_label = Label(self.window, text="Section", font=self.font, bg=self.background)
         section_list_box = ttk.Combobox(self.window, state="disabled", width=3,font="arial 18 bold")
         section_label.place(x=685, y=66)
         section_list_box.place(x=720, y=130)
@@ -137,24 +146,27 @@ class gui:
         ok_button_section = Button(self.window, text="OK", font="arial 14 bold", state="disabled", padx=7, pady=2, command=section_func)
         ok_button_section.place(x=722, y=180)
 
-        subject_label = Label(self.window, text="Subject", font="algerian 26 ", bg=self.background)
+        subject_label = Label(self.window, text="Subject", font=self.font, bg=self.background)
         subject_list_box = ttk.Combobox(self.window, state="disabled", width=12,font="arial 18 bold")
-        subject_label.place(x=190, y=300)
-        subject_list_box.place(x=177, y=366)
+        subject_label.place(x=190, y=260)
+        subject_list_box.place(x=177, y=326)
 
         ok_button_subject = Button(self.window, text="OK", font="arial 14 bold", state="disabled", padx=7, pady=2, command=subject_func)
-        ok_button_subject.place(x=232, y=420)
+        ok_button_subject.place(x=232, y=380)
 
-        exam_label = Label(self.window, text="Exams", font="algerian 26 ", bg=self.background)
+        exam_label = Label(self.window, text="Exams", font=self.font, bg=self.background)
         exam_list_box = ttk.Combobox(self.window, values=exam_list, state="disabled", width=8, font="arial 18 bold")
-        exam_label.place(x=555, y=300)
-        exam_list_box.place(x=555, y=366)
+        exam_label.place(x=555, y=260)
+        exam_list_box.place(x=555, y=326)
 
         ok_button_exam = Button(self.window, text="OK", font="arial 14 bold", state="disabled", padx=7, pady=2, command=exam_func)
-        ok_button_exam.place(x=585, y=420)
+        ok_button_exam.place(x=585, y=380)
 
-        button_btn = Button(self.window, text="Select a folder", font="algerian 18 ", padx=5, pady=2,command=select_folder, borderwidth=5)
-        button_btn.pack(side=BOTTOM, pady=40)
+        select_button = Button(button_frame, text="Select input folder", state="disabled", font="algerian 18 ", padx=57, pady=2,command=select_folder, borderwidth=5)
+        select_button.pack(expand=True)
+
+        save_button = Button(button_frame, text="Show Result Folder", state="disabled", font="algerian 18", padx=56, pady=2, command=select_to_save, borderwidth=5)
+        save_button.pack(expand=True, pady=20)
 
 
     def get_Path(self):
